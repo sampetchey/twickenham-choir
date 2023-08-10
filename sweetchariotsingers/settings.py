@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "payments.apps.PaymentsConfig",
-    "news"
+    "news",
 ]
 
 MIDDLEWARE = [
@@ -125,6 +125,12 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Base url to serve media files
+MEDIA_URL = '/media/'
+
+# Path where media is stored
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 STRIPE_PUBLISHABLE_KEY = 'pk_test_MnXEKIuzHLVaFrTLdGXNSddN'
 STRIPE_SECRET_KEY = 'sk_test_jq0ZJE4LBmhBDd7Df1Ike5Hn'
