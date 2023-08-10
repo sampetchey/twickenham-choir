@@ -1,0 +1,142 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  {% block meta %}  
+  <meta http-equiv = "X-UA-compatible" content="ie=edge">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% endblock %}
+
+  {% block extra_meta %}
+  {% endblock %}
+
+  {% block corecss %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  {% endblock %}
+
+  {% block corejs %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v6.4.0/js/all.js"></script>
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="{% static 'main.js' %}"></script>
+  {% endblock %}
+  
+  <title>Sweet Chariot Singers {% block extra_title %}{% endblock %}</title>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="nav-wrapper purple darken-2 z-depth-2">
+        <a href="{% url 'home' %}"><img class="header-logo" src="/media/treble-home.png"
+            alt="treble-clef home logo"></a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="{% url 'news' %}">News & Events</a></li>
+          {% comment %} <li><a href="{% url 'visit' %}">Visit a Rehearsal</a></li>
+          <li><a href="{% url 'team' %}">Meet the Team</a></li> {% endcomment %}
+
+          {% if user.is_authenticated %}
+          <li><a href="songs.html">Learn New Songs</a></li>
+          <li>User: {{ user.get_username }}</li>
+          <li><a class='dropdown-trigger btn' href='/accounts/logout?next=/'>Logout</a></li>
+        {% else %}
+          <a class='dropdown-trigger btn' href='/accounts/login' data-target='dropdown1'>Already a Member? Log In</a>
+          <a class='dropdown-trigger btn' href='/accounts/signup' data-target='dropdown2'>Subscribe</a>
+          {% comment %} <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li> {% endcomment %}
+        {% endif %}
+          
+
+          
+          
+        </ul>
+        <ul id='dropdown1' class='dropdown-content'>
+          <li><a href="#!">one</a></li>
+          <li><a href="#!">two</a></li>
+          <li class="divider" tabindex="-1"></li>
+          <li><a href="#!">three</a></li>
+          <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
+          <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <ul class="sidenav" id="mobile-demo">
+      <li><a href="news.html">News & Event</a></li>
+      <li><a href="rehearsals.html">Visit a Rehearsal</a></li>
+      <li><a href="team.html">Meet the Team</a></li>
+      <li><a href="songs.html">Learn New Songs</a></li>
+    </ul>
+  </header>
+
+    {% if messages %}
+    <div class="container"></div>
+    {% endif %}
+
+    {% block page_header %}
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+
+    {% block postloadjs %}
+    {% endblock %}
+
+
+
+
+
+  
+{% comment %} 
+
+  
+  <div class="section">
+    <a class="waves-effect waves-light btn modal-trigger" data-target="modal1">Modal</a>
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4>Modal Header</h4>
+        <p>A bunch of text</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+      </div>
+    </div>
+  </div>
+{% endcomment %}
+
+  <footer class="page-footer purple darken-2">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Footer Content</h5>
+          <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          <h5 class="white-text">Links</h5>
+          <ul>
+            <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+            <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+            <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+            <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright purple darken-2 z-depth-2 bottom">
+      <div class="container white-text center">
+        © Petchey Online Publishing Ltd.
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
